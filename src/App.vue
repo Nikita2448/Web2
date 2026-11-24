@@ -11,6 +11,15 @@ const cart = ref([])
 const isLoading = ref(true)
 const error = ref(null)
 
+// Стан пошуку, фільтрів та сортування
+const searchQuery = ref('')
+const selectedCategory = ref('All')
+const selectedBrand = ref('All')
+const sortBy = ref('default')
+
+const categories = ['All', 'RTX 50', 'RTX 40', 'RTX 30']
+const brands = ['All', 'NVIDIA', 'ASUS', 'MSI', 'Gigabyte', 'Palit']
+
 // Стан модального вікна оформлення замовлення
 const isCheckoutOpen = ref(false)
 const orderSubmitted = ref(false)
@@ -22,7 +31,6 @@ const customer = ref({
 })
 
 onMounted(async () => {
-  // Відновлюємо кошик з localStorage
   const savedCart = localStorage.getItem(CART_STORAGE_KEY)
   if (savedCart) {
     try {
@@ -32,7 +40,6 @@ onMounted(async () => {
     }
   }
 
-  // Завантажуємо каталог
   try {
     const response = await fetch('/data/gpus.json')
     if (!response.ok) throw new Error(`HTTP ${response.status}`)
@@ -45,7 +52,6 @@ onMounted(async () => {
   }
 })
 
-// Автоматично зберігаємо кошик при будь-якій зміні
 watch(
   cart,
   (newCart) => {
@@ -53,6 +59,41 @@ watch(
   },
   { deep: true }
 )
+
+// Відфільтрований та відсортований список відеокарт
+const filteredProducts = computed(() => {
+  const query = searchQuery.value.trim().toLowerCase()
+
+  const result = products.value.filter((gpu) => {
+    const matchesCategory =
+      selectedCategory.value === 'All' || gpu.category === selectedCategory.value
+    const matchesBrand =
+      selectedBrand.value === 'All' || gpu.brand === selectedBrand.value
+    const matchesSearch =
+      !query ||
+      gpu.name.toLowerCase().includes(query) ||
+      gpu.brand.toLowerCase().includes(query) ||
+      gpu.architecture.toLowerCase().includes(query)
+
+    return matchesCategory && matchesBrand && matchesSearch
+  })
+
+  if (sortBy.value === 'price-asc') {
+    return [...result].sort((a, b) => a.price - b.price)
+  }
+  if (sortBy.value === 'price-desc') {
+    return [...result].sort((a, b) => b.price - a.price)
+  }
+
+  return result
+})
+
+const resetFilters = () => {
+  searchQuery.value = ''
+  selectedCategory.value = 'All'
+  selectedBrand.value = 'All'
+  sortBy.value = 'default'
+}
 
 const totalItems = computed(() => {
   return cart.value.reduce((sum, item) => sum + item.quantity, 0)
@@ -127,51 +168,106 @@ const submitOrder = () => {
       <p>{{ error }}</p>
     </div>
 
-    <div v-else class="shop-layout">
-      <section class="products-grid">
-        <ProductCard
-          v-for="gpu in products"
-          :key="gpu.id"
-          :gpu="gpu"
-          @add-to-cart="handleAddToCart"
-        />
-      </section>
+    <div v-else>
+      <!-- Панель пошуку, фільтрів та сортування -->
+      <section class="filters-bar">
+        <div class="filters-top">
+          <input
+            v-model="searchQuery"
+            type="search"
+            class="search-input"
+            placeholder="Пошук моделі (напр. 5080, ROG, SUPRIM, Blackwell)..."
+          />
 
-      <aside class="cart-sidebar">
-        <div class="cart-header">
-          <h2>Кошик</h2>
-          <button v-if="cart.length > 0" class="clear-btn" @click="clearCart">
-            Очистити
-          </button>
+          <select v-model="sortBy" class="sort-select">
+            <option value="default">Сортування: За замовчуванням</option>
+            <option value="price-asc">Ціна: Від дешевших до дорожчих</option>
+            <option value="price-desc">Ціна: Від дорожчих до дешевших</option>
+          </select>
         </div>
 
-        <div v-if="cart.length === 0" class="empty-state">
-          <p>Кошик порожній. Додайте відеокарту з каталогу.</p>
-        </div>
-
-        <div v-else class="cart-content">
-          <div class="cart-list">
-            <CartItem
-              v-for="item in cart"
-              :key="item.id"
-              :item="item"
-              @increment="incrementQuantity"
-              @decrement="decrementQuantity"
-              @remove="removeFromCart"
-            />
+        <div class="filters-groups">
+          <div class="filter-chips">
+            <span class="filter-label">Серія:</span>
+            <button
+              v-for="cat in categories"
+              :key="cat"
+              :class="['chip-btn', { active: selectedCategory === cat }]"
+              @click="selectedCategory = cat"
+            >
+              {{ cat === 'All' ? 'Усі' : cat }}
+            </button>
           </div>
 
-          <div class="cart-summary">
-            <div class="summary-row">
-              <span>Разом ({{ totalItems }} шт.):</span>
-              <strong>${{ totalPrice.toLocaleString() }}</strong>
-            </div>
-            <button class="btn-primary checkout-btn" @click="openCheckout">
-              Оформити замовлення
+          <div class="filter-chips">
+            <span class="filter-label">Бренд:</span>
+            <button
+              v-for="brand in brands"
+              :key="brand"
+              :class="['chip-btn', { active: selectedBrand === brand }]"
+              @click="selectedBrand = brand"
+            >
+              {{ brand === 'All' ? 'Усі' : brand }}
             </button>
           </div>
         </div>
-      </aside>
+      </section>
+
+      <div class="shop-layout">
+        <section>
+          <div v-if="filteredProducts.length === 0" class="empty-state">
+            <p>За вибраними параметрами відеокарт не знайдено.</p>
+            <button class="btn-primary" style="margin-top: 12px" @click="resetFilters">
+              Скинути фільтри
+            </button>
+          </div>
+
+          <div v-else class="products-grid">
+            <ProductCard
+              v-for="gpu in filteredProducts"
+              :key="gpu.id"
+              :gpu="gpu"
+              @add-to-cart="handleAddToCart"
+            />
+          </div>
+        </section>
+
+        <aside class="cart-sidebar">
+          <div class="cart-header">
+            <h2>Кошик</h2>
+            <button v-if="cart.length > 0" class="clear-btn" @click="clearCart">
+              Очистити
+            </button>
+          </div>
+
+          <div v-if="cart.length === 0" class="empty-state">
+            <p>Кошик порожній. Додайте відеокарту з каталогу.</p>
+          </div>
+
+          <div v-else class="cart-content">
+            <div class="cart-list">
+              <CartItem
+                v-for="item in cart"
+                :key="item.id"
+                :item="item"
+                @increment="incrementQuantity"
+                @decrement="decrementQuantity"
+                @remove="removeFromCart"
+              />
+            </div>
+
+            <div class="cart-summary">
+              <div class="summary-row">
+                <span>Разом ({{ totalItems }} шт.):</span>
+                <strong>${{ totalPrice.toLocaleString() }}</strong>
+              </div>
+              <button class="btn-primary checkout-btn" @click="openCheckout">
+                Оформити замовлення
+              </button>
+            </div>
+          </div>
+        </aside>
+      </div>
     </div>
   </main>
 

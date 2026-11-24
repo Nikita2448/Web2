@@ -227,6 +227,93 @@ input:focus, select:focus {
   border-color: var(--accent);
 }
 
+.filters-bar {
+  background: #141414;
+  border: 1px solid #262626;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.filters-top {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 240px;
+  background: #0b0b0b;
+  border: 1px solid #2e2e2e;
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: #ffffff;
+  font-size: 0.95rem;
+}
+
+.search-input:focus,
+.sort-select:focus {
+  outline: none;
+  border-color: #76b900;
+}
+
+.sort-select {
+  background: #0b0b0b;
+  border: 1px solid #2e2e2e;
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: #ffffff;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.filters-groups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 28px;
+  align-items: center;
+}
+
+.filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-label {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  margin-right: 4px;
+}
+
+.chip-btn {
+  background: #1f1f1f;
+  border: 1px solid #2e2e2e;
+  color: #d4d4d4;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chip-btn:hover {
+  border-color: #76b900;
+  color: #ffffff;
+}
+
+.chip-btn.active {
+  background: #76b900;
+  border-color: #76b900;
+  color: #0b0b0b;
+  font-weight: 600;
+}
+
 /* --- SHOP LAYOUT (Catalog + Cart) --- */
 .shop-layout {
   display: grid;
