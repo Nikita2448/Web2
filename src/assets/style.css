@@ -413,6 +413,112 @@ input:focus, select:focus {
   color: var(--accent);
 }
 
+.checkout-btn {
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px;
+  font-size: 1rem;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 1000;
+}
+
+.modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: #141414;
+  border: 1px solid #2b2b2b;
+  border-radius: 12px;
+  padding: 24px;
+  color: #f5f5f5;
+}
+
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  color: #ffffff;
+}
+
+.modal-subtitle {
+  margin: 6px 0 18px;
+  color: #a3a3a3;
+  font-size: 0.95rem;
+}
+
+.checkout-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.checkout-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: #d4d4d4;
+}
+
+.checkout-form input,
+.checkout-form select {
+  background: #0b0b0b;
+  border: 1px solid #2e2e2e;
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #ffffff;
+  font-size: 0.95rem;
+}
+
+.checkout-form input:focus,
+.checkout-form select:focus {
+  outline: none;
+  border-color: #76b900;
+}
+
+.order-success {
+  text-align: center;
+  padding: 12px 0;
+}
+
+.success-icon {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  background: rgba(118, 185, 0, 0.15);
+  color: #76b900;
+  font-size: 1.6rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.order-success p {
+  color: #b5b5b5;
+  margin: 10px 0 20px;
+  line-height: 1.5;
+}
+
 /* --- EMPTY / NOT FOUND STATES --- */
 .empty-state {
   background-color: var(--bg-card);

@@ -1,15 +1,38 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import AppHeader from './components/AppHeader.vue'
 import ProductCard from './components/ProductCard.vue'
 import CartItem from './components/CartItem.vue'
+
+const CART_STORAGE_KEY = 'nvhub_cart_v1'
 
 const products = ref([])
 const cart = ref([])
 const isLoading = ref(true)
 const error = ref(null)
 
+// Стан модального вікна оформлення замовлення
+const isCheckoutOpen = ref(false)
+const orderSubmitted = ref(false)
+const customer = ref({
+  name: '',
+  phone: '',
+  city: '',
+  delivery: 'Нова Пошта'
+})
+
 onMounted(async () => {
+  // Відновлюємо кошик з localStorage
+  const savedCart = localStorage.getItem(CART_STORAGE_KEY)
+  if (savedCart) {
+    try {
+      cart.value = JSON.parse(savedCart)
+    } catch {
+      localStorage.removeItem(CART_STORAGE_KEY)
+    }
+  }
+
+  // Завантажуємо каталог
   try {
     const response = await fetch('/data/gpus.json')
     if (!response.ok) throw new Error(`HTTP ${response.status}`)
@@ -22,17 +45,23 @@ onMounted(async () => {
   }
 })
 
-// Загальна кількість одиниць товару в кошику (для шапки)
+// Автоматично зберігаємо кошик при будь-якій зміні
+watch(
+  cart,
+  (newCart) => {
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(newCart))
+  },
+  { deep: true }
+)
+
 const totalItems = computed(() => {
   return cart.value.reduce((sum, item) => sum + item.quantity, 0)
 })
 
-// Загальна вартість усіх товарів у кошику
 const totalPrice = computed(() => {
   return cart.value.reduce((sum, item) => sum + item.price * item.quantity, 0)
 })
 
-// Додавання відеокарти в кошик
 const handleAddToCart = (gpu) => {
   const existingItem = cart.value.find((item) => item.id === gpu.id)
   if (existingItem) {
@@ -42,13 +71,11 @@ const handleAddToCart = (gpu) => {
   }
 }
 
-// Збільшити кількість (+)
 const incrementQuantity = (id) => {
   const item = cart.value.find((item) => item.id === id)
   if (item) item.quantity += 1
 }
 
-// Зменшити кількість (−)
 const decrementQuantity = (id) => {
   const item = cart.value.find((item) => item.id === id)
   if (!item) return
@@ -60,14 +87,26 @@ const decrementQuantity = (id) => {
   }
 }
 
-// Видалити позицію з кошика (✕)
 const removeFromCart = (id) => {
   cart.value = cart.value.filter((item) => item.id !== id)
 }
 
-// Очистити весь кошик
 const clearCart = () => {
   cart.value = []
+}
+
+const openCheckout = () => {
+  orderSubmitted.value = false
+  isCheckoutOpen.value = true
+}
+
+const closeCheckout = () => {
+  isCheckoutOpen.value = false
+}
+
+const submitOrder = () => {
+  orderSubmitted.value = true
+  clearCart()
 }
 </script>
 
@@ -127,11 +166,66 @@ const clearCart = () => {
               <span>Разом ({{ totalItems }} шт.):</span>
               <strong>${{ totalPrice.toLocaleString() }}</strong>
             </div>
+            <button class="btn-primary checkout-btn" @click="openCheckout">
+              Оформити замовлення
+            </button>
           </div>
         </div>
       </aside>
     </div>
   </main>
+
+  <!-- Модальне вікно оформлення замовлення -->
+  <div v-if="isCheckoutOpen" class="modal-backdrop" @click.self="closeCheckout">
+    <div class="modal-card">
+      <button class="modal-close" @click="closeCheckout">✕</button>
+
+      <div v-if="!orderSubmitted">
+        <h2>Оформлення замовлення</h2>
+        <p class="modal-subtitle">
+          Товарів: <strong>{{ totalItems }} шт.</strong> на суму
+          <strong>${{ totalPrice.toLocaleString() }}</strong>
+        </p>
+
+        <form class="checkout-form" @submit.prevent="submitOrder">
+          <label>
+            Ім'я та прізвище
+            <input v-model.trim="customer.name" type="text" required placeholder="Олександр Коваленко" />
+          </label>
+
+          <label>
+            Телефон
+            <input v-model.trim="customer.phone" type="tel" required placeholder="+380 (99) 123-45-67" />
+          </label>
+
+          <label>
+            Місто доставки
+            <input v-model.trim="customer.city" type="text" required placeholder="Київ" />
+          </label>
+
+          <label>
+            Спосіб доставки
+            <select v-model="customer.delivery">
+              <option value="Нова Пошта">Нова Пошта (відділення / поштомат)</option>
+              <option value="Кур'єр">Кур'єрська доставка</option>
+              <option value="Самовивіз">Самовивіз із шоуруму NV HUB</option>
+            </select>
+          </label>
+
+          <button type="submit" class="btn-primary checkout-btn">
+            Підтвердити замовлення
+          </button>
+        </form>
+      </div>
+
+      <div v-else class="order-success">
+        <div class="success-icon">✓</div>
+        <h2>Замовлення прийнято!</h2>
+        <p>Дякуємо, <strong>{{ customer.name }}</strong>. Ми зв'яжемося за номером {{ customer.phone }} для підтвердження доставки ({{ customer.city }}, {{ customer.delivery }}).</p>
+        <button class="btn-primary" @click="closeCheckout">Повернутися до каталогу</button>
+      </div>
+    </div>
+  </div>
 
   <footer class="site-footer">
     <div class="container">
