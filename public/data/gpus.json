@@ -9,7 +9,7 @@
     "cudaCores": 21760,
     "price": 1999,
     "badge": "Flagship",
-    "image": "/img/rtx5090.png"
+    "image": "/img/rtx5090.jpg"
   },
   {
     "id": 2,
@@ -21,7 +21,7 @@
     "cudaCores": 21760,
     "price": 2349,
     "badge": "Top Cooling",
-    "image": "/img/asus-rtx5090.png"
+    "image": "/img/asus-rtx5090.jpg"
   },
   {
     "id": 3,
@@ -33,7 +33,7 @@
     "cudaCores": 21760,
     "price": 2299,
     "badge": null,
-    "image": "/img/msi-rtx5090.png"
+    "image": "/img/msi-rtx5090.jpg"
   },
   {
     "id": 4,
@@ -45,7 +45,7 @@
     "cudaCores": 10752,
     "price": 1249,
     "badge": "Liquid",
-    "image": "/img/msi-rtx5080.png"
+    "image": "/img/msi-rtx5080.jpg"
   },
   {
     "id": 5,
@@ -57,7 +57,7 @@
     "cudaCores": 10752,
     "price": 1149,
     "badge": "New",
-    "image": "/img/aorus-rtx5080.png"
+    "image": "/img/aorus-rtx5080.jpg"
   },
   {
     "id": 6,
@@ -69,7 +69,7 @@
     "cudaCores": 8960,
     "price": 829,
     "badge": null,
-    "image": "/img/asus-rtx5070ti.png"
+    "image": "/img/asus-rtx5070ti.jpg"
   },
   {
     "id": 7,
@@ -81,7 +81,7 @@
     "cudaCores": 8960,
     "price": 799,
     "badge": null,
-    "image": "/img/gigabyte-rtx5070ti.png"
+    "image": "/img/gigabyte-rtx5070ti.jpg"
   },
   {
     "id": 8,
@@ -93,7 +93,7 @@
     "cudaCores": 6144,
     "price": 669,
     "badge": "ROG Strix",
-    "image": "/img/asus-rog-rtx5070.png"
+    "image": "/img/asus-rog-rtx5070.jpg"
   },
   {
     "id": 9,
@@ -105,7 +105,7 @@
     "cudaCores": 6144,
     "price": 589,
     "badge": "RGB",
-    "image": "/img/palit-rtx5070.png"
+    "image": "/img/palit-rtx5070.jpg"
   },
   {
     "id": 10,
@@ -117,7 +117,7 @@
     "cudaCores": 16384,
     "price": 1749,
     "badge": "Legend",
-    "image": "/img/msi-rtx4090.png"
+    "image": "/img/msi-rtx4090.jpg"
   },
   {
     "id": 11,
@@ -129,7 +129,7 @@
     "cudaCores": 10240,
     "price": 1129,
     "badge": null,
-    "image": "/img/asus-rtx4080s.png"
+    "image": "/img/asus-rtx4080s.jpg"
   },
   {
     "id": 12,
@@ -141,7 +141,7 @@
     "cudaCores": 8448,
     "price": 799,
     "badge": "Best Value",
-    "image": "/img/gigabyte-rtx4070tis.png"
+    "image": "/img/gigabyte-rtx4070tis.jpg"
   },
   {
     "id": 13,
@@ -153,7 +153,7 @@
     "cudaCores": 7168,
     "price": 619,
     "badge": "Hit",
-    "image": "/img/msi-rtx4070s.png"
+    "image": "/img/msi-rtx4070s.jpg"
   },
   {
     "id": 14,
@@ -165,7 +165,7 @@
     "cudaCores": 5888,
     "price": 549,
     "badge": null,
-    "image": "/img/palit-rtx4070.png"
+    "image": "/img/palit-rtx4070.jpg"
   },
   {
     "id": 15,
@@ -177,7 +177,7 @@
     "cudaCores": 4352,
     "price": 449,
     "badge": null,
-    "image": "/img/palit-rtx4060ti.png"
+    "image": "/img/palit-rtx4060ti.jpg"
   },
   {
     "id": 16,
@@ -189,7 +189,7 @@
     "cudaCores": 3072,
     "price": 319,
     "badge": "White Edition",
-    "image": "/img/asus-rtx4060.png"
+    "image": "/img/asus-rtx4060.jpg"
   },
   {
     "id": 17,
@@ -201,7 +201,7 @@
     "cudaCores": 3072,
     "price": 309,
     "badge": null,
-    "image": "/img/gigabyte-rtx4060.png"
+    "image": "/img/gigabyte-rtx4060.jpg"
   },
   {
     "id": 18,
@@ -213,7 +213,7 @@
     "cudaCores": 10752,
     "price": 1099,
     "badge": "Classic Flagship",
-    "image": "/img/rtx3090ti.png"
+    "image": "/img/rtx3090ti.jpg"
   },
   {
     "id": 19,
@@ -225,7 +225,7 @@
     "cudaCores": 10240,
     "price": 749,
     "badge": null,
-    "image": "/img/aorus-rtx3080ti.png"
+    "image": "/img/aorus-rtx3080ti.jpg"
   },
   {
     "id": 20,
@@ -237,7 +237,7 @@
     "cudaCores": 8704,
     "price": 569,
     "badge": null,
-    "image": "/img/asus-rtx3080.png"
+    "image": "/img/asus-rtx3080.jpg"
   },
   {
     "id": 21,
@@ -249,7 +249,7 @@
     "cudaCores": 6144,
     "price": 459,
     "badge": null,
-    "image": "/img/msi-rtx3070ti.png"
+    "image": "/img/msi-rtx3070ti.jpg"
   },
   {
     "id": 22,
@@ -261,7 +261,7 @@
     "cudaCores": 4864,
     "price": 349,
     "badge": "Popular",
-    "image": "/img/gigabyte-rtx3060ti.png"
+    "image": "/img/gigabyte-rtx3060ti.jpg"
   },
   {
     "id": 23,
@@ -273,7 +273,7 @@
     "cudaCores": 3584,
     "price": 309,
     "badge": "Classic Hit",
-    "image": "/img/asus-rtx3060.png"
+    "image": "/img/asus-rtx3060.jpg"
   },
   {
     "id": 24,
@@ -285,6 +285,6 @@
     "cudaCores": 3584,
     "price": 289,
     "badge": "Budget King",
-    "image": "/img/palit-rtx3060.png"
+    "image": "/img/palit-rtx3060.jpg"
   }
 ]
