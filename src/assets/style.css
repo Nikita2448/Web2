@@ -144,6 +144,17 @@ header {
   color: #ffffff;
 }
 
+.btn-in-cart {
+  background: #1f2e0a;
+  color: #76b900;
+  border: 1px solid #76b900;
+}
+
+.btn-in-cart:hover {
+  background: #76b900;
+  color: #0b0b0b;
+}
+
 /* --- MAIN & HEADINGS --- */
 main {
   flex: 1;
@@ -657,5 +668,22 @@ footer {
 
   .search-sort {
     flex-direction: column;
+  }
+}
+
+@media (max-width: 960px) {
+  .cart-sidebar {
+    position: static;
+    margin-top: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .filters-top {
+    flex-direction: column;
+  }
+
+  .sort-select {
+    width: 100%;
   }
 }

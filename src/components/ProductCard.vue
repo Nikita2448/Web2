@@ -3,6 +3,10 @@ const props = defineProps({
   gpu: {
     type: Object,
     required: true
+  },
+  inCartQty: {
+    type: Number,
+    default: 0
   }
 })
 
@@ -28,8 +32,11 @@ const handleImageError = (event) => {
 
       <div class="card-footer">
         <span class="card-price">${{ gpu.price.toLocaleString() }}</span>
-        <button class="btn-primary" @click="emit('add-to-cart', gpu)">
-          У кошик
+        <button
+          :class="['btn-primary', { 'btn-in-cart': inCartQty > 0 }]"
+          @click="emit('add-to-cart', gpu)"
+        >
+          {{ inCartQty > 0 ? `✓ У кошику (${inCartQty})` : 'У кошик' }}
         </button>
       </div>
     </div>

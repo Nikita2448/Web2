@@ -112,6 +112,11 @@ const handleAddToCart = (gpu) => {
   }
 }
 
+const getItemQty = (gpuId) => {
+  const found = cart.value.find((item) => item.id === gpuId)
+  return found ? found.quantity : 0
+}
+
 const incrementQuantity = (id) => {
   const item = cart.value.find((item) => item.id === id)
   if (item) item.quantity += 1
@@ -227,6 +232,7 @@ const submitOrder = () => {
               v-for="gpu in filteredProducts"
               :key="gpu.id"
               :gpu="gpu"
+              :in-cart-qty="getItemQty(gpu.id)"
               @add-to-cart="handleAddToCart"
             />
           </div>
