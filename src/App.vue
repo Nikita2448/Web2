@@ -20,6 +20,16 @@ const sortBy = ref('default')
 const categories = ['All', 'RTX 50', 'RTX 40', 'RTX 30']
 const brands = ['All', 'NVIDIA', 'ASUS', 'MSI', 'Gigabyte', 'Palit']
 
+// Стан підбору відеокарти під конфігурацію ПК
+const isConfiguratorOpen = ref(false)
+const pcBuild = ref({
+  active: false,
+  cpuTier: 4,
+  psuWattage: 1000,
+  maxLengthMm: 380,
+  targetRes: 'all' // 'all' | '1080p' | '1440p' | '4k'
+})
+
 // Стан модальних вікон (кошик та оформлення замовлення)
 const isCartOpen = ref(false)
 const isCheckoutOpen = ref(false)
@@ -76,7 +86,24 @@ const filteredProducts = computed(() => {
       gpu.brand.toLowerCase().includes(query) ||
       gpu.architecture.toLowerCase().includes(query)
 
-    return matchesCategory && matchesBrand && matchesSearch
+    if (!matchesCategory || !matchesBrand || !matchesSearch) return false
+
+    // Фільтрація за параметрами ПК користувача
+    if (pcBuild.value.active) {
+      const reqCpuTier = getRequiredCpuTier(gpu)
+      const reqPsu = parseSpecNumber(gpu.recommendedPsu, 550)
+      const lengthMm = parseSpecNumber(gpu.dimensions, 300)
+      const vramGb = parseSpecNumber(gpu.vram, 8)
+
+      if (reqCpuTier > pcBuild.value.cpuTier) return false
+      if (reqPsu > pcBuild.value.psuWattage) return false
+      if (lengthMm > pcBuild.value.maxLengthMm) return false
+
+      if (pcBuild.value.targetRes === '1440p' && vramGb < 12) return false
+      if (pcBuild.value.targetRes === '4k' && vramGb < 16) return false
+    }
+
+    return true
   })
 
   if (sortBy.value === 'price-asc') {
@@ -94,6 +121,38 @@ const resetFilters = () => {
   selectedCategory.value = 'All'
   selectedBrand.value = 'All'
   sortBy.value = 'default'
+  resetPcBuild()
+}
+
+// Витягує перше число з рядка (напр. "750 Вт" -> 750, "312 мм (2.5 слоти)" -> 312)
+const parseSpecNumber = (str, fallback) => {
+  if (!str) return fallback
+  const match = String(str).match(/\d+/)
+  return match ? Number(match[0]) : fallback
+}
+
+// Визначає мінімально рекомендований рівень процесора (1..4) для відеокарти
+const getRequiredCpuTier = (gpu) => {
+  const name = gpu.name.toUpperCase()
+  if (name.includes('5090') || name.includes('4090')) return 4
+  if (name.includes('5080') || name.includes('4080') || name.includes('4070 TI')) return 3
+  if (name.includes('5070') || name.includes('4070') || name.includes('3080') || name.includes('3090')) return 2
+  return 1
+}
+
+const applyPcBuild = () => {
+  pcBuild.value.active = true
+  isConfiguratorOpen.value = false
+}
+
+const resetPcBuild = () => {
+  pcBuild.value = {
+    active: false,
+    cpuTier: 4,
+    psuWattage: 1000,
+    maxLengthMm: 380,
+    targetRes: 'all'
+  }
 }
 
 const totalItems = computed(() => {
@@ -215,6 +274,14 @@ const closeProductDetails = () => {
             <option value="price-asc">Ціна: Від дешевших до дорожчих</option>
             <option value="price-desc">Ціна: Від дорожчих до дешевших</option>
           </select>
+
+          <button
+            type="button"
+            :class="['btn-configurator', { active: pcBuild.active }]"
+            @click="isConfiguratorOpen = true"
+          >
+            {{ pcBuild.active ? `✓ Підбір: CPU Рівень ${pcBuild.cpuTier} / БЖ ${pcBuild.psuWattage}Вт` : 'Підбір під мій ПК' }}
+          </button>
         </div>
 
         <div class="filters-groups">
@@ -441,6 +508,66 @@ const closeProductDetails = () => {
           </button>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div v-if="isConfiguratorOpen" class="modal-backdrop" @click.self="isConfiguratorOpen = false">
+    <div class="modal-card">
+      <button class="modal-close" @click="isConfiguratorOpen = false">✕</button>
+      <h2>Підбір відеокарти під конфігурацію</h2>
+      <p class="modal-subtitle">Вкажіть параметри вашого ПК — ми залишимо лише сумісні моделі.</p>
+
+      <form class="checkout-form" @submit.prevent="applyPcBuild">
+        <label>
+          Ваш процесор (CPU)
+          <select v-model.number="pcBuild.cpuTier">
+            <option :value="1">Початковий (Ryzen 5 3600/5500, Core i3-12100F / i5-10400F)</option>
+            <option :value="2">Середній (Ryzen 5 5600/7500F, Core i5-12400F / 13400F)</option>
+            <option :value="3">Продуктивний (Ryzen 7 5800X3D/7700X, Core i5-13600K / i7-13700K)</option>
+            <option :value="4">Флагманський (Ryzen 7 7800X3D/9800X3D, Core i7-14700K / i9 / Ultra 9)</option>
+          </select>
+        </label>
+
+        <label>
+          Потужність вашого блоку живлення (БЖ)
+          <select v-model.number="pcBuild.psuWattage">
+            <option :value="550">550 Вт</option>
+            <option :value="650">650 Вт</option>
+            <option :value="750">750 Вт</option>
+            <option :value="850">850 Вт</option>
+            <option :value="1000">1000+ Вт</option>
+          </select>
+        </label>
+
+        <label>
+          Макс. довжина відеокарти для корпусу: <strong>{{ pcBuild.maxLengthMm }} мм</strong>
+          <input v-model.number="pcBuild.maxLengthMm" type="range" min="240" max="380" step="5" />
+        </label>
+
+        <label>
+          Цільова роздільна здатність / задачі
+          <select v-model="pcBuild.targetRes">
+            <option value="all">Будь-яка (усі моделі)</option>
+            <option value="1080p">Full HD (1080p) — від 8 ГБ VRAM</option>
+            <option value="1440p">Quad HD (1440p) — від 12 ГБ VRAM</option>
+            <option value="4k">4K Ultra / Робота з ШІ — від 16 ГБ VRAM</option>
+          </select>
+        </label>
+
+        <div class="configurator-actions">
+          <button type="submit" class="btn-primary">
+            Показати сумісні карти
+          </button>
+          <button
+            v-if="pcBuild.active"
+            type="button"
+            class="clear-btn"
+            @click="resetPcBuild(); isConfiguratorOpen = false"
+          >
+            Скинути
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 

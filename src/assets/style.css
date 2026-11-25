@@ -226,6 +226,25 @@ header {
   color: #0b0b0b;
 }
 
+.btn-configurator {
+  background: #141414;
+  color: #76b900;
+  border: 1px solid #76b900;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-configurator:hover,
+.btn-configurator.active {
+  background: #76b900;
+  color: #0b0b0b;
+}
+
 /* --- MAIN & HEADINGS --- */
 main {
   flex: 1;
@@ -848,6 +867,23 @@ input:focus, select:focus {
 .checkout-form select:focus {
   outline: none;
   border-color: #76b900;
+}
+
+.checkout-form input[type="range"] {
+  accent-color: #76b900;
+  padding: 0;
+  margin-top: 6px;
+  cursor: pointer;
+}
+
+.configurator-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.configurator-actions .btn-primary {
+  flex: 1;
 }
 
 .order-success {
