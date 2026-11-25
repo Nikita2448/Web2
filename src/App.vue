@@ -20,7 +20,8 @@ const sortBy = ref('default')
 const categories = ['All', 'RTX 50', 'RTX 40', 'RTX 30']
 const brands = ['All', 'NVIDIA', 'ASUS', 'MSI', 'Gigabyte', 'Palit']
 
-// Стан модального вікна оформлення замовлення
+// Стан модальних вікон (кошик та оформлення замовлення)
+const isCartOpen = ref(false)
 const isCheckoutOpen = ref(false)
 const orderSubmitted = ref(false)
 const customer = ref({
@@ -60,7 +61,6 @@ watch(
   { deep: true }
 )
 
-// Відфільтрований та відсортований список відеокарт
 const filteredProducts = computed(() => {
   const query = searchQuery.value.trim().toLowerCase()
 
@@ -141,7 +141,16 @@ const clearCart = () => {
   cart.value = []
 }
 
+const openCart = () => {
+  isCartOpen.value = true
+}
+
+const closeCart = () => {
+  isCartOpen.value = false
+}
+
 const openCheckout = () => {
+  isCartOpen.value = false
   orderSubmitted.value = false
   isCheckoutOpen.value = true
 }
@@ -157,7 +166,7 @@ const submitOrder = () => {
 </script>
 
 <template>
-  <AppHeader :cart-count="totalItems" />
+  <AppHeader :cart-count="totalItems" @open-cart="openCart" />
 
   <main class="container">
     <section class="hero">
@@ -218,64 +227,71 @@ const submitOrder = () => {
         </div>
       </section>
 
-      <div class="shop-layout">
-        <section>
-          <div v-if="filteredProducts.length === 0" class="empty-state">
-            <p>За вибраними параметрами відеокарт не знайдено.</p>
-            <button class="btn-primary" style="margin-top: 12px" @click="resetFilters">
-              Скинути фільтри
-            </button>
-          </div>
+      <!-- Каталог на всю ширину -->
+      <section>
+        <div v-if="filteredProducts.length === 0" class="empty-state">
+          <p>За вибраними параметрами відеокарт не знайдено.</p>
+          <button class="btn-primary" style="margin-top: 12px" @click="resetFilters">
+            Скинути фільтри
+          </button>
+        </div>
 
-          <div v-else class="products-grid">
-            <ProductCard
-              v-for="gpu in filteredProducts"
-              :key="gpu.id"
-              :gpu="gpu"
-              :in-cart-qty="getItemQty(gpu.id)"
-              @add-to-cart="handleAddToCart"
-            />
-          </div>
-        </section>
-
-        <aside class="cart-sidebar">
-          <div class="cart-header">
-            <h2>Кошик</h2>
-            <button v-if="cart.length > 0" class="clear-btn" @click="clearCart">
-              Очистити
-            </button>
-          </div>
-
-          <div v-if="cart.length === 0" class="empty-state">
-            <p>Кошик порожній. Додайте відеокарту з каталогу.</p>
-          </div>
-
-          <div v-else class="cart-content">
-            <div class="cart-list">
-              <CartItem
-                v-for="item in cart"
-                :key="item.id"
-                :item="item"
-                @increment="incrementQuantity"
-                @decrement="decrementQuantity"
-                @remove="removeFromCart"
-              />
-            </div>
-
-            <div class="cart-summary">
-              <div class="summary-row">
-                <span>Разом ({{ totalItems }} шт.):</span>
-                <strong>${{ totalPrice.toLocaleString() }}</strong>
-              </div>
-              <button class="btn-primary checkout-btn" @click="openCheckout">
-                Оформити замовлення
-              </button>
-            </div>
-          </div>
-        </aside>
-      </div>
+        <div v-else class="products-grid">
+          <ProductCard
+            v-for="gpu in filteredProducts"
+            :key="gpu.id"
+            :gpu="gpu"
+            :in-cart-qty="getItemQty(gpu.id)"
+            @add-to-cart="handleAddToCart"
+          />
+        </div>
+      </section>
     </div>
   </main>
+
+  <!-- Модальне вікно кошика -->
+  <div v-if="isCartOpen" class="modal-backdrop" @click.self="closeCart">
+    <div class="modal-card modal-cart">
+      <button class="modal-close" @click="closeCart">✕</button>
+
+      <div class="cart-modal-header">
+        <h2>Кошик</h2>
+        <button v-if="cart.length > 0" class="clear-btn" @click="clearCart">
+          Очистити
+        </button>
+      </div>
+
+      <div v-if="cart.length === 0" class="empty-state">
+        <p>Кошик порожній. Додайте відеокарту з каталогу.</p>
+        <button class="btn-primary" style="margin-top: 16px" @click="closeCart">
+          Перейти до вибору
+        </button>
+      </div>
+
+      <div v-else class="cart-content">
+        <div class="cart-list modal-cart-list">
+          <CartItem
+            v-for="item in cart"
+            :key="item.id"
+            :item="item"
+            @increment="incrementQuantity"
+            @decrement="decrementQuantity"
+            @remove="removeFromCart"
+          />
+        </div>
+
+        <div class="cart-summary">
+          <div class="summary-row">
+            <span>Разом ({{ totalItems }} шт.):</span>
+            <strong>${{ totalPrice.toLocaleString() }}</strong>
+          </div>
+          <button class="btn-primary checkout-btn" @click="openCheckout">
+            Оформити замовлення
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Модальне вікно оформлення замовлення -->
   <div v-if="isCheckoutOpen" class="modal-backdrop" @click.self="closeCheckout">

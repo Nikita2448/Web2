@@ -79,6 +79,27 @@ header {
   color: #e5e5e5;
 }
 
+.cart-trigger {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.cart-trigger:hover {
+  border-color: #76b900;
+  background: #222222;
+}
+
+.cart-trigger strong {
+  background: #76b900;
+  color: #0b0b0b;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -385,8 +406,8 @@ input:focus, select:focus {
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
 }
 
 /* --- PRODUCT CARD --- */
@@ -628,6 +649,24 @@ input:focus, select:focus {
   color: #f5f5f5;
 }
 
+.modal-cart {
+  max-width: 560px;
+}
+
+.cart-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 28px;
+  margin-bottom: 16px;
+}
+
+.modal-cart-list {
+  max-height: 55vh;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
 .modal-close {
   position: absolute;
   top: 14px;
@@ -733,6 +772,10 @@ footer {
 @media (max-width: 1024px) {
   .shop-layout {
     grid-template-columns: 1fr;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .cart-box {
