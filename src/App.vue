@@ -72,6 +72,14 @@ watch(
   { deep: true }
 )
 
+watch(
+  [isCartOpen, isCheckoutOpen, isConfiguratorOpen, selectedGpu],
+  ([cartOpen, checkoutOpen, configuratorOpen, gpu]) => {
+    const isAnyModalOpen = Boolean(cartOpen || checkoutOpen || configuratorOpen || gpu)
+    document.body.style.overflow = isAnyModalOpen ? 'hidden' : ''
+  }
+)
+
 const filteredProducts = computed(() => {
   const query = searchQuery.value.trim().toLowerCase()
 
