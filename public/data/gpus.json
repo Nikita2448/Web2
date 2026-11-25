@@ -9,7 +9,13 @@
     "cudaCores": 21760,
     "price": 1999,
     "badge": "Flagship",
-    "image": "/img/rtx5090.jpg"
+    "image": "/img/rtx5090.jpg",
+    "description": "Система охолодження Founders Edition із випарною камерою та двома вентиляторами ефективно відводить тепло від потужного GPU. Карта розрахована на 4K-геймінг із трасуванням променів і високою частотою кадрів.",
+    "tdp": "575 Вт",
+    "recommendedPsu": "1000 Вт",
+    "recommendedCpu": "Ryzen 7 9800X3D / Core Ultra 9 285K",
+    "powerConnector": "1× 16-pin (12V-2x6)",
+    "dimensions": "304 мм (2 слоти)"
   },
   {
     "id": 2,
@@ -21,7 +27,13 @@
     "cudaCores": 21760,
     "price": 2349,
     "badge": "Top Cooling",
-    "image": "/img/asus-rtx5090.jpg"
+    "image": "/img/asus-rtx5090.jpg",
+    "description": "Масивний кулер ROG Astral із чотирма вентиляторами та великою паровою камерою підтримує стабільні температури під високим навантаженням. Модель призначена для 4K-геймінгу та вимогливих задач зі трасуванням променів.",
+    "tdp": "575 Вт",
+    "recommendedPsu": "1000 Вт",
+    "recommendedCpu": "Ryzen 7 9800X3D / Core Ultra 9 285K",
+    "powerConnector": "1× 16-pin (12V-2x6)",
+    "dimensions": "357,6 × 149,3 × 76 мм (3,8 слота)"
   },
   {
     "id": 3,
@@ -33,7 +45,13 @@
     "cudaCores": 21760,
     "price": 2299,
     "badge": null,
-    "image": "/img/msi-rtx5090.jpg"
+    "image": "/img/msi-rtx5090.jpg",
+    "description": "Кулер MSI SUPRIM із трьома вентиляторами та масивним радіатором розрахований на тривале інтенсивне навантаження. Відеокарта забезпечує комфортний 4K-геймінг із максимальними налаштуваннями.",
+    "tdp": "575 Вт",
+    "recommendedPsu": "1000 Вт",
+    "recommendedCpu": "Ryzen 7 9800X3D / Core Ultra 9 285K",
+    "powerConnector": "1× 16-pin (12V-2x6)",
+    "dimensions": "359 × 150 × 76 мм (3,8 слота)"
   },
   {
     "id": 4,
@@ -45,7 +63,13 @@
     "cudaCores": 10752,
     "price": 1249,
     "badge": "Liquid",
-    "image": "/img/msi-rtx5080.jpg"
+    "image": "/img/msi-rtx5080.jpg",
+    "description": "Гібридне охолодження SUPRIM LIQUID поєднує водоблок на карті з окремим радіатором 360 мм для відведення тепла. Модель добре підходить для 4K-геймінгу та високої частоти кадрів у 1440p.",
+    "tdp": "360 Вт",
+    "recommendedPsu": "850 Вт",
+    "recommendedCpu": "Ryzen 7 9800X3D / Core Ultra 9 285K",
+    "powerConnector": "1× 16-pin (12V-2x6)",
+    "dimensions": "280 мм (2,5 слота; радіатор 360 мм)"
   },
   {
     "id": 5,
@@ -57,7 +81,13 @@
     "cudaCores": 10752,
     "price": 1149,
     "badge": "New",
-    "image": "/img/aorus-rtx5080.jpg"
+    "image": "/img/aorus-rtx5080.jpg",
+    "description": "Система WINDFORCE з трьома вентиляторами та великою випарною камерою забезпечує ефективне охолодження під час тривалих ігрових сесій. RTX 5080 MASTER орієнтована на 4K із високими налаштуваннями та трасуванням променів.",
+    "tdp": "360 Вт",
+    "recommendedPsu": "850 Вт",
+    "recommendedCpu": "Ryzen 7 9800X3D / Core Ultra 9 285K",
+    "powerConnector": "1× 16-pin (12V-2x6)",
+    "dimensions": "360 × 150 × 75 мм (3,8 слота)"
   },
   {
     "id": 6,
@@ -69,7 +99,13 @@
     "cudaCores": 8960,
     "price": 829,
     "badge": null,
-    "image": "/img/asus-rtx5070ti.jpg"
+    "image": "/img/asus-rtx5070ti.jpg",
+    "description": "Кулер ASUS TUF із трьома вентиляторами Axial-tech і масивним радіатором підтримує низькі температури під навантаженням. Карта підходить для 1440p з високою частотою кадрів і впевнено працює в 4K.",
+    "tdp": "300 Вт",
+    "recommendedPsu": "750 Вт",
+    "recommendedCpu": "Ryzen 7 7800X3D / Core Ultra 7 265K",
+    "powerConnector": "1× 16-pin (12V-2x6)",
+    "dimensions": "329 × 140 × 62,5 мм (3,1 слота)"
   },
   {
     "id": 7,
@@ -81,7 +117,13 @@
     "cudaCores": 8960,
     "price": 799,
     "badge": null,
-    "image": "/img/gigabyte-rtx5070ti.jpg"
+    "image": "/img/gigabyte-rtx5070ti.jpg",
+    "description": "Три вентилятори WINDFORCE та широкий радіатор Gigabyte GAMING OC допомагають утримувати стабільну продуктивність у тривалих ігрових сесіях. Модель орієнтована на 1440p із високими налаштуваннями та підтримує комфортний геймінг у 4K.",
+    "tdp": "300 Вт",
+    "recommendedPsu": "750 Вт",
+    "recommendedCpu": "Ryzen 7 7800X3D / Core Ultra 7 265K",
+    "powerConnector": "1× 16-pin (12V-2x6)",
+    "dimensions": "340 × 140 × 70 мм (3,5 слота)"
   },
   {
     "id": 8,
@@ -93,7 +135,13 @@
     "cudaCores": 6144,
     "price": 669,
     "badge": "ROG Strix",
-    "image": "/img/asus-rog-rtx5070.jpg"
+    "image": "/img/asus-rog-rtx5070.jpg",
+    "description": "Три вентилятори Axial-tech і великий радіатор ROG Strix забезпечують тиху роботу під час ігор. Карта розрахована на 1440p з високою частотою кадрів і підходить для 4K із відповідними налаштуваннями.",
+    "tdp": "250 Вт",
+    "recommendedPsu": "750 Вт",
+    "recommendedCpu": "Ryzen 7 7800X3D / Core i7-14700K",
+    "powerConnector": "1× 16-pin (12V-2x6)",
+    "dimensions": "329 × 140 × 62,5 мм (3,1 слота)"
   },
   {
     "id": 9,
@@ -105,7 +153,13 @@
     "cudaCores": 6144,
     "price": 589,
     "badge": "RGB",
-    "image": "/img/palit-rtx5070.jpg"
+    "image": "/img/palit-rtx5070.jpg",
+    "description": "Масивний кулер Palit GameRock із трьома вентиляторами створений для стабільного охолодження під час тривалого навантаження. Відеокарта добре підходить для 1440p і може забезпечити плавний геймінг у 4K з оптимізованими налаштуваннями.",
+    "tdp": "250 Вт",
+    "recommendedPsu": "750 Вт",
+    "recommendedCpu": "Ryzen 7 7800X3D / Core i7-14700K",
+    "powerConnector": "1× 16-pin (12V-2x6)",
+    "dimensions": "331,9 × 127,1 × 60,5 мм (3 слоти)"
   },
   {
     "id": 10,
@@ -117,7 +171,13 @@
     "cudaCores": 16384,
     "price": 1749,
     "badge": "Legend",
-    "image": "/img/msi-rtx4090.jpg"
+    "image": "/img/msi-rtx4090.jpg",
+    "description": "Система TRI FROZR 3 із трьома вентиляторами та мідною основою ефективно охолоджує GPU під час тривалих навантажень. RTX 4090 GAMING X TRIO призначена для 4K-геймінгу з максимальними налаштуваннями.",
+    "tdp": "480 Вт",
+    "recommendedPsu": "850 Вт",
+    "recommendedCpu": "Ryzen 7 7800X3D / Core i7-14700K",
+    "powerConnector": "1× 16-pin (12VHPWR)",
+    "dimensions": "337 × 140 × 77 мм (3,5 слота)"
   },
   {
     "id": 11,
@@ -129,7 +189,13 @@
     "cudaCores": 10240,
     "price": 1129,
     "badge": null,
-    "image": "/img/asus-rtx4080s.jpg"
+    "image": "/img/asus-rtx4080s.jpg",
+    "description": "Три вентилятори Axial-tech і масивний радіатор ROG Strix забезпечують стабільне охолодження під час інтенсивних ігор. Модель оптимальна для 4K і високої частоти кадрів у 1440p.",
+    "tdp": "320 Вт",
+    "recommendedPsu": "850 Вт",
+    "recommendedCpu": "Ryzen 7 7800X3D / Core i7-14700K",
+    "powerConnector": "1× 16-pin (12VHPWR)",
+    "dimensions": "357,6 × 149,3 × 70,1 мм (3,5 слота)"
   },
   {
     "id": 12,
@@ -141,7 +207,13 @@
     "cudaCores": 8448,
     "price": 799,
     "badge": "Best Value",
-    "image": "/img/gigabyte-rtx4070tis.jpg"
+    "image": "/img/gigabyte-rtx4070tis.jpg",
+    "description": "Три вентилятори WINDFORCE та широкий радіатор охолоджують RTX 4070 Ti SUPER під час тривалого навантаження. Карта добре підходить для 1440p з ультра-налаштуваннями та геймінгу в 4K.",
+    "tdp": "285 Вт",
+    "recommendedPsu": "750 Вт",
+    "recommendedCpu": "Ryzen 7 7700 / Core i5-14600K",
+    "powerConnector": "1× 16-pin (12VHPWR)",
+    "dimensions": "261 × 126 × 50 мм (2,5 слота)"
   },
   {
     "id": 13,
@@ -153,7 +225,13 @@
     "cudaCores": 7168,
     "price": 619,
     "badge": "Hit",
-    "image": "/img/msi-rtx4070s.jpg"
+    "image": "/img/msi-rtx4070s.jpg",
+    "description": "Три вентилятори TORX FAN 4.0 і радіатор MSI VENTUS 3X забезпечують ефективне охолодження без надмірного шуму. RTX 4070 SUPER підходить для високої частоти кадрів у 1440p та ігор у 4K.",
+    "tdp": "245 Вт",
+    "recommendedPsu": "650 Вт",
+    "recommendedCpu": "Ryzen 7 7700 / Core i5-14600K",
+    "powerConnector": "1× 16-pin (12VHPWR)",
+    "dimensions": "308 × 120 × 43 мм (2 слоти)"
   },
   {
     "id": 14,
@@ -165,7 +243,13 @@
     "cudaCores": 5888,
     "price": 549,
     "badge": null,
-    "image": "/img/palit-rtx4070.jpg"
+    "image": "/img/palit-rtx4070.jpg",
+    "description": "Компактний двовентиляторний кулер Palit Dual забезпечує збалансоване охолодження для повсякденних ігрових навантажень. RTX 4070 комфортно працює в 1440p і підтримує 4K з оптимізованими графічними налаштуваннями.",
+    "tdp": "200 Вт",
+    "recommendedPsu": "650 Вт",
+    "recommendedCpu": "Ryzen 5 7600 / Core i5-14600K",
+    "powerConnector": "1× 8-pin",
+    "dimensions": "269,1 × 127,6 × 40,1 мм (2 слоти)"
   },
   {
     "id": 15,
@@ -177,7 +261,13 @@
     "cudaCores": 4352,
     "price": 449,
     "badge": null,
-    "image": "/img/palit-rtx4060ti.jpg"
+    "image": "/img/palit-rtx4060ti.jpg",
+    "description": "Два вентилятори та компактний радіатор Palit Dual забезпечують ефективне охолодження за помірного рівня шуму. Версія з 16 ГБ пам'яті добре підходить для 1080p і 1440p, зокрема в задачах із великими текстурами.",
+    "tdp": "165 Вт",
+    "recommendedPsu": "650 Вт",
+    "recommendedCpu": "Ryzen 5 7600 / Core i5-13400F",
+    "powerConnector": "1× 8-pin",
+    "dimensions": "249,9 × 123,5 × 40 мм (2 слоти)"
   },
   {
     "id": 16,
@@ -189,7 +279,13 @@
     "cudaCores": 3072,
     "price": 319,
     "badge": "White Edition",
-    "image": "/img/asus-rtx4060.jpg"
+    "image": "/img/asus-rtx4060.jpg",
+    "description": "Два вентилятори Axial-tech і конструкція ASUS Dual забезпечують тихе охолодження в компактному корпусі. RTX 4060 оптимальна для 1080p з високою частотою кадрів і трасуванням променів.",
+    "tdp": "115 Вт",
+    "recommendedPsu": "550 Вт",
+    "recommendedCpu": "Ryzen 5 5600 / Core i5-12400F",
+    "powerConnector": "1× 8-pin",
+    "dimensions": "227,2 × 123,2 × 49,6 мм (2,5 слота)"
   },
   {
     "id": 17,
@@ -201,7 +297,13 @@
     "cudaCores": 3072,
     "price": 309,
     "badge": null,
-    "image": "/img/gigabyte-rtx4060.jpg"
+    "image": "/img/gigabyte-rtx4060.jpg",
+    "description": "Три вентилятори WINDFORCE із чергуванням обертання допомагають відводити тепло під час ігрових сесій. Модель EAGLE OC призначена для 1080p та забезпечує плавний геймінг у 1440p з оптимізованими налаштуваннями.",
+    "tdp": "115 Вт",
+    "recommendedPsu": "550 Вт",
+    "recommendedCpu": "Ryzen 5 5600 / Core i5-12400F",
+    "powerConnector": "1× 8-pin",
+    "dimensions": "272 × 115 × 40 мм (2 слоти)"
   },
   {
     "id": 18,
@@ -213,7 +315,13 @@
     "cudaCores": 10752,
     "price": 1099,
     "badge": "Classic Flagship",
-    "image": "/img/rtx3090ti.jpg"
+    "image": "/img/rtx3090ti.jpg",
+    "description": "Двостороння система охолодження Founders Edition із випарною камерою та двома вентиляторами відводить тепло від потужного GPU. RTX 3090 Ti залишається придатною для 4K-геймінгу та ресурсоємної роботи з графікою.",
+    "tdp": "450 Вт",
+    "recommendedPsu": "850 Вт",
+    "recommendedCpu": "Ryzen 7 7800X3D / Core i7-14700K",
+    "powerConnector": "1× 16-pin (12VHPWR)",
+    "dimensions": "313 × 138 × 61 мм (3 слоти)"
   },
   {
     "id": 19,
@@ -225,7 +333,13 @@
     "cudaCores": 10240,
     "price": 749,
     "badge": null,
-    "image": "/img/aorus-rtx3080ti.jpg"
+    "image": "/img/aorus-rtx3080ti.jpg",
+    "description": "Потрійний кулер WINDFORCE із великим радіатором та випарною камерою призначений для стабільної роботи під високим навантаженням. RTX 3080 Ti AORUS XTREME підходить для 4K-геймінгу та високої частоти кадрів у 1440p.",
+    "tdp": "400 Вт",
+    "recommendedPsu": "850 Вт",
+    "recommendedCpu": "Ryzen 7 7800X3D / Core i7-14700K",
+    "powerConnector": "3× 8-pin",
+    "dimensions": "319 × 140 × 70 мм (3,5 слота)"
   },
   {
     "id": 20,
@@ -237,7 +351,13 @@
     "cudaCores": 8704,
     "price": 569,
     "badge": null,
-    "image": "/img/asus-rtx3080.jpg"
+    "image": "/img/asus-rtx3080.jpg",
+    "description": "Три вентилятори Axial-tech і посилений радіатор ASUS TUF забезпечують ефективне охолодження під тривалим навантаженням. RTX 3080 V2 OC призначена для 1440p з високими налаштуваннями та геймінгу в 4K.",
+    "tdp": "340 Вт",
+    "recommendedPsu": "850 Вт",
+    "recommendedCpu": "Ryzen 7 7800X3D / Core i7-14700K",
+    "powerConnector": "2× 8-pin",
+    "dimensions": "299,9 × 126,9 × 51,7 мм (2,7 слота)"
   },
   {
     "id": 21,
@@ -249,7 +369,13 @@
     "cudaCores": 6144,
     "price": 459,
     "badge": null,
-    "image": "/img/msi-rtx3070ti.jpg"
+    "image": "/img/msi-rtx3070ti.jpg",
+    "description": "Кулер MSI TRI FROZR 2S із трьома вентиляторами та масивним радіатором розрахований на інтенсивний геймінг. RTX 3070 Ti SUPRIM X добре підходить для 1440p та забезпечує комфортну продуктивність у 4K.",
+    "tdp": "310 Вт",
+    "recommendedPsu": "750 Вт",
+    "recommendedCpu": "Ryzen 7 7700 / Core i5-14600K",
+    "powerConnector": "2× 8-pin",
+    "dimensions": "335 × 140 × 61 мм (3 слоти)"
   },
   {
     "id": 22,
@@ -261,7 +387,13 @@
     "cudaCores": 4864,
     "price": 349,
     "badge": "Popular",
-    "image": "/img/gigabyte-rtx3060ti.jpg"
+    "image": "/img/gigabyte-rtx3060ti.jpg",
+    "description": "Три вентилятори WINDFORCE і широкий радіатор Gigabyte GAMING OC допомагають зберігати стабільну температуру під час ігор. RTX 3060 Ti орієнтована на 1080p з високою частотою кадрів і підходить для 1440p.",
+    "tdp": "220 Вт",
+    "recommendedPsu": "650 Вт",
+    "recommendedCpu": "Ryzen 5 5600 / Core i5-12400F",
+    "powerConnector": "2× 8-pin",
+    "dimensions": "282 × 117 × 41 мм (2 слоти)"
   },
   {
     "id": 23,
@@ -273,7 +405,13 @@
     "cudaCores": 3584,
     "price": 309,
     "badge": "Classic Hit",
-    "image": "/img/asus-rtx3060.jpg"
+    "image": "/img/asus-rtx3060.jpg",
+    "description": "Два вентилятори Axial-tech і радіатор ASUS Dual підтримують збалансоване охолодження для компактної ігрової системи. RTX 3060 з 12 ГБ пам'яті підходить для 1080p та базового 1440p-геймінгу.",
+    "tdp": "170 Вт",
+    "recommendedPsu": "650 Вт",
+    "recommendedCpu": "Ryzen 5 5600 / Core i5-12400F",
+    "powerConnector": "1× 8-pin",
+    "dimensions": "242 × 130 × 49,5 мм (2,5 слота)"
   },
   {
     "id": 24,
@@ -285,6 +423,12 @@
     "cudaCores": 3584,
     "price": 289,
     "badge": "Budget King",
-    "image": "/img/palit-rtx3060.jpg"
+    "image": "/img/palit-rtx3060.jpg",
+    "description": "Двовентиляторний кулер Palit Dual забезпечує надійне охолодження для повсякденного геймінгу та помірний рівень шуму. RTX 3060 12GB призначена для 1080p і може впоратися з 1440p на оптимізованих налаштуваннях.",
+    "tdp": "170 Вт",
+    "recommendedPsu": "550 Вт",
+    "recommendedCpu": "Ryzen 5 5600 / Core i5-12400F",
+    "powerConnector": "1× 8-pin",
+    "dimensions": "245 × 119 × 40 мм (2 слоти)"
   }
 ]

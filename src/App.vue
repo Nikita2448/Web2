@@ -24,6 +24,7 @@ const brands = ['All', 'NVIDIA', 'ASUS', 'MSI', 'Gigabyte', 'Palit']
 const isCartOpen = ref(false)
 const isCheckoutOpen = ref(false)
 const orderSubmitted = ref(false)
+const selectedGpu = ref(null)
 const customer = ref({
   name: '',
   phone: '',
@@ -163,6 +164,14 @@ const submitOrder = () => {
   orderSubmitted.value = true
   clearCart()
 }
+
+const openProductDetails = (gpu) => {
+  selectedGpu.value = gpu
+}
+
+const closeProductDetails = () => {
+  selectedGpu.value = null
+}
 </script>
 
 <template>
@@ -243,6 +252,7 @@ const submitOrder = () => {
             :gpu="gpu"
             :in-cart-qty="getItemQty(gpu.id)"
             @add-to-cart="handleAddToCart"
+            @select-gpu="openProductDetails"
           />
         </div>
       </section>
@@ -341,6 +351,78 @@ const submitOrder = () => {
         <h2>Замовлення прийнято!</h2>
         <p>Дякуємо, <strong>{{ customer.name }}</strong>. Ми зв'яжемося за номером {{ customer.phone }} для підтвердження доставки ({{ customer.city }}, {{ customer.delivery }}).</p>
         <button class="btn-primary" @click="closeCheckout">Повернутися до каталогу</button>
+      </div>
+    </div>
+  </div>
+
+<!-- Модальне вікно детального опису відеокарти -->
+  <div v-if="selectedGpu" class="modal-backdrop" @click.self="closeProductDetails">
+    <div class="modal-card modal-details">
+      <button class="modal-close" @click="closeProductDetails">✕</button>
+
+      <div class="details-image">
+        <img :src="selectedGpu.image" :alt="selectedGpu.name" />
+        <span v-if="selectedGpu.badge" class="card-badge">{{ selectedGpu.badge }}</span>
+      </div>
+
+      <div class="details-body">
+        <span class="card-category">
+          {{ selectedGpu.brand }} • {{ selectedGpu.category }} • Архітектура {{ selectedGpu.architecture }}
+        </span>
+        <h2>{{ selectedGpu.name }}</h2>
+
+        <p class="details-description">
+          {{ selectedGpu.description || `Фірмова відеокарта ${selectedGpu.name} на базі архітектури NVIDIA ${selectedGpu.architecture}. Оснащена ${selectedGpu.vram} високошвидкісної відеопам'яті та ${selectedGpu.cudaCores.toLocaleString()} ядрами CUDA для максимальної продуктивності в іграх із трасуванням променів та роботі з ШІ.` }}
+        </p>
+
+        <div class="specs-grid">
+          <div class="spec-box">
+            <span class="spec-label">Відеопам'ять</span>
+            <strong>{{ selectedGpu.vram }}</strong>
+          </div>
+          <div class="spec-box">
+            <span class="spec-label">Ядра CUDA</span>
+            <strong>{{ selectedGpu.cudaCores.toLocaleString() }}</strong>
+          </div>
+          <div class="spec-box">
+            <span class="spec-label">Споживання (TDP)</span>
+            <strong>{{ selectedGpu.tdp || '285 Вт' }}</strong>
+          </div>
+          <div class="spec-box">
+            <span class="spec-label">Рекомендований БЖ</span>
+            <strong>{{ selectedGpu.recommendedPsu || '750 Вт' }}</strong>
+          </div>
+          <div class="spec-box">
+            <span class="spec-label">Рекомендований CPU</span>
+            <strong>{{ selectedGpu.recommendedCpu || 'Ryzen 7 7800X3D / Core i7-14700K' }}</strong>
+          </div>
+          <div class="spec-box">
+            <span class="spec-label">Роз'єм живлення</span>
+            <strong>{{ selectedGpu.powerConnector || '1× 16-pin (12V-2x6)' }}</strong>
+          </div>
+          <div class="spec-box">
+            <span class="spec-label">Довжина / товщина</span>
+            <strong>{{ selectedGpu.dimensions || '312 мм (2.5 слоти)' }}</strong>
+          </div>
+          <div class="spec-box">
+            <span class="spec-label">Інтерфейс</span>
+            <strong>{{ selectedGpu.interface || 'PCIe 5.0 x16' }}</strong>
+          </div>
+        </div>
+
+        <div class="details-footer">
+          <div class="details-price">
+            <span>Ціна:</span>
+            <strong>${{ selectedGpu.price.toLocaleString() }}</strong>
+          </div>
+
+          <button
+            :class="['btn-primary', { 'btn-in-cart': getItemQty(selectedGpu.id) > 0 }]"
+            @click="handleAddToCart(selectedGpu)"
+          >
+            {{ getItemQty(selectedGpu.id) > 0 ? `✓ У кошику (${getItemQty(selectedGpu.id)}) — додати ще` : 'Додати в кошик' }}
+          </button>
+        </div>
       </div>
     </div>
   </div>

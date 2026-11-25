@@ -10,7 +10,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['add-to-cart'])
+const emit = defineEmits(['add-to-cart', 'select-gpu'])
 
 const handleImageError = (event) => {
   event.target.src = `https://placehold.co/400x260/141414/76b900?text=${encodeURIComponent(props.gpu.brand + ' ' + props.gpu.category)}`
@@ -18,7 +18,7 @@ const handleImageError = (event) => {
 </script>
 
 <template>
-  <article class="product-card">
+  <article class="product-card" @click="emit('select-gpu', gpu)">
     <span v-if="gpu.badge" class="card-badge">{{ gpu.badge }}</span>
 
     <div class="card-image">
@@ -34,7 +34,7 @@ const handleImageError = (event) => {
         <span class="card-price">${{ gpu.price.toLocaleString() }}</span>
         <button
           :class="['btn-primary', { 'btn-in-cart': inCartQty > 0 }]"
-          @click="emit('add-to-cart', gpu)"
+          @click.stop="emit('add-to-cart', gpu)"
         >
           {{ inCartQty > 0 ? `✓ У кошику (${inCartQty})` : 'У кошик' }}
         </button>
