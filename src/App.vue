@@ -165,6 +165,14 @@ const submitOrder = () => {
   clearCart()
 }
 
+const sanitizePhone = (event) => {
+  let cleaned = event.target.value.replace(/[^\d+\s()-]/g, '')
+  // Видаляємо всі символи '+', окрім найпершого на початку рядка
+  cleaned = cleaned.replace(/(?!^)\+/g, '')
+  customer.value.phone = cleaned
+  event.target.value = cleaned
+}
+
 const openProductDetails = (gpu) => {
   selectedGpu.value = gpu
 }
@@ -323,7 +331,16 @@ const closeProductDetails = () => {
 
           <label>
             Телефон
-            <input v-model.trim="customer.phone" type="tel" required placeholder="+380 (99) 123-45-67" />
+            <input
+              :value="customer.phone"
+              type="tel"
+              inputmode="tel"
+              required
+              pattern="[\d+\s()-]{10,20}"
+              title="Введіть коректний номер телефону (мінімум 10 символів, без літер)"
+              placeholder="+380 (99) 123-45-67"
+              @input="sanitizePhone"
+            />
           </label>
 
           <label>
